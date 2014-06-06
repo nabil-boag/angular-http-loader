@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Angular HTTP Loader</title>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
+
+    <script src="js/httpLoader.js"></script>
+    <script src="js/httpMethodInterceptor.js"></script>
+
+    <script>
+      var app = angular
+        .module('demo', ['ng.httpLoader'])
+
+        .config([
+          'httpMethodInterceptorProvider',
+          function (httpMethodInterceptorProvider) {
+            httpMethodInterceptorProvider.whitelistDomain('validate.jsontest.com');
+            httpMethodInterceptorProvider.whitelistDomain('github.com');
+          }
+        ])
+
+        .controller('demoCtrl', [
+          '$scope',
+          '$http',
+          function (scope, $http) {
+            scope.makeRequest = function (index) {
+              switch (index) {
+                case 1:
+                  $http.get('http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D');
+                  break;
+                case 2:
+                  $http.get('https://api.github.com/users/fabpot/repos');
+                  break;
+                case 3:
+                  $http.get('http://www.flickr.com/services/feeds/photos_public.gne?tags=soccer&format=json');
+                  break;
+              }
+            }
+          }
+        ]);
+    </script>
+  </head>
+  <body ng-app="demo" ng-controller="demoCtrl">
+    <button ng-click="makeRequest(1)">jsontest (Whitelisted)</button>
+    <button ng-click="makeRequest(2)">Github (Whitelisted)</button>
+    <button ng-click="makeRequest(3)">Flickr (Not whitelisted - loader won't show)</button>
+
+    <!-- Loader template -->
+    <script type="text/ng-template" id="example-loader.tpl.html">Loading {{title}}...</script>
+
+    <!-- show loader for GET methods -->
+     <div ng-http-loader methods="GET" title="Foo" template="example-loader.tpl.html"></div>
+
+    <!-- show loader for PUT and POST methods -->
+    <!--<div ng-http-loader methods="['PUT', 'POST']" template="example-loader.tpl.html"></div>-->
+  </body>
+</html>

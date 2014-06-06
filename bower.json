@@ -1,0 +1,24 @@
+{
+  "name": "angular-http-loader",
+  "version": "0.1.0",
+  "ignore": [
+    "app/src",
+    ".bowerrc",
+    ".gitignore",
+    ".jshintrc",
+    "bower.json",
+    "Gruntfile.js",
+    "karma-unit.conf.js",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.2.0",
+    "angular-scenario": "~1.2.0"
+  },
+  "dependencies": {
+    "angular": "~1.2.0",
+    "lodash": "*"
+  }
+}
