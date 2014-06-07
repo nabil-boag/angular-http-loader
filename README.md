@@ -1,8 +1,8 @@
 HTTP Loader
 ===========
 
-The HTTP loader component monitors HTTP requests and shows a custom loader element
-when the call starts and hides that loader when the call finishes.
+Angular component which monitors HTTP requests and shows a custom loader element
+when calls start and hides it when they complete.
 
 Maintainer: Mauro Gadaleta <<mauro.gadaleta@wonga.com>>
 
