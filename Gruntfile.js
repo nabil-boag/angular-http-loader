@@ -49,7 +49,7 @@ module.exports = function (grunt) {
     env: grunt.option('env') || 'dev',
 
     app: {
-      name: 'tempo-http-loader',
+      name: 'angular-http-loader',
       source_dir: 'app/src',
       build_dir: 'app/build',
       package_dir: 'app/package'

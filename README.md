@@ -18,10 +18,10 @@ bower install --save angular-http-loader
 Usage
 -----
 
-Load tempo-http-loader.min.js:
+Load angular-http-loader.min.js:
 
 ```html
-<script src="path/to/tempo-http-loader.min.js"></script>
+<script src="path/to/angular-http-loader.min.js"></script>
 ```
 
 Add the `ng.httpLoader` module as a dependency in your application:
@@ -86,6 +86,8 @@ We :heart: pull requests!
 To contribute:
 
 - Fork the repo
+- Run `npm install`
+- Run `bower install`
 - Run `grunt workflow:dev` to watch for changes, lint, build and run tests as
   you're working
 - Write your unit tests for your change
