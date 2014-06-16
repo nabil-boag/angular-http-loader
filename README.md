@@ -18,10 +18,10 @@ bower install --save angular-http-loader
 Usage
 -----
 
-Load tempo-http-loader.min.js:
+Load angular-http-loader.min.js:
 
 ```html
-<script src="path/to/tempo-http-loader.min.js"></script>
+<script src="path/to/angular-http-loader.min.js"></script>
 ```
 
 Add the `ng.httpLoader` module as a dependency in your application:
@@ -43,11 +43,11 @@ Whitelist the domains that you want the loader to show for:
 ])
 ```
 
-Add an HTML element with the `http-loader` directive. This will be displayed
+Add an HTML element with the `ng-http-loader` directive. This will be displayed
 while requests are pending:
 
 ```html
-<div http-loader template="example/loader.tpl.html"></div>
+<div ng-http-loader template="example/loader.tpl.html"></div>
 ```
 
 ### Different loaders for different methods
@@ -55,13 +55,13 @@ while requests are pending:
 Monitor only `GET` requests:
 
 ```html
-<div http-loader methods="GET" template="example/loader.tpl.html"></div>
+<div ng-http-loader methods="GET" template="example/loader.tpl.html"></div>
 ```
 
 Monitor POST and PUT requests:
 
 ```html
-<div http-loader methods="['POST', 'PUT']" template="example/loader.tpl.html"></div>
+<div ng-http-loader methods="['POST', 'PUT']" template="example/loader.tpl.html"></div>
 ```
 
 ### Adding a title to your template
@@ -69,7 +69,7 @@ Monitor POST and PUT requests:
 HTTP loader allows you to pass a title to your template:
 
 ```html
-<div http-loader title="example" methods="GET" template="example/loader.tpl.html"></div>
+<div ng-http-loader title="example" methods="GET" template="example/loader.tpl.html"></div>
 ```
 
 And use that in your template:
@@ -86,6 +86,8 @@ We :heart: pull requests!
 To contribute:
 
 - Fork the repo
+- Run `npm install`
+- Run `bower install`
 - Run `grunt workflow:dev` to watch for changes, lint, build and run tests as
   you're working
 - Write your unit tests for your change
