@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Angular HTTP Loader</title>
+
+    <!-- Bootstrap -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
+
+    <script src="bower_components/angular-http-loader/app/package/js/tempo-http-loader.min.js"></script>
+
+    <style>
+        .flyover .alert {
+            left: 50%;
+            top: 50%;
+            position: fixed;
+            z-index: 1050;
+        }
+
+        .flyover .mask {
+            top: 0;
+            left: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            background: black;
+            z-index: 1049;
+        }
+
+        code {
+            margin: 2em;
+            padding: 0.5em;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img src="logo.png" width="100">
+            </a>
+
+            <div class="media-body">
+                <h1 class="text-muted">Angular HTTP Loader</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="">
+        <p class="lead">
+            Angular component which monitors HTTP requests and shows a
+            custom loader element when calls start and hides it when
+            they complete
+        </p>
+    </div>
+
+    <div class="row marketing">
+        <div class="col-lg-6 small">
+            <div class="page-header"><h4>Installation and usage</h4></div>
+
+            <h5 class="text-muted">Installation</h5>
+            <code>bower install --save angular-http-loader</code>
+            <h5 class="text-muted">Usage</h5>
+
+            <p>Load angular-http-loader.min.js:
+                <code>
+                    &lt;script src="path/to/angular-http-loader.min.js"&gt;&lt;/script&gt;
+                </code>
+            </p>
+
+            <p>
+                Add the ng.httpLoader module as a dependency in your
+                application:
+
+                <code>
+                    angular.module('demo', ['ng.httpLoader'])
+                </code>
+
+
+            </p>
+
+            <p>
+                Whitelist the domains that you want the loader to show
+                for:<br>
+                <code>.config(['httpMethodInterceptorProvider',<br>
+                    &nbsp;&nbsp;function (httpMethodInterceptorProvider) {<br>
+                    &nbsp;&nbsp;httpMethodInterceptorProvider.whitelistDomain('github.com');<br>
+                    &nbsp;&nbsp;httpMethodInterceptorProvider.whitelistDomain('twitter.com');<br>
+                    &nbsp;&nbsp;// ...<br>
+                    &nbsp;}<br>
+                    ])<br>
+                </code>
+            </p>
+
+
+            <p>
+                Add an HTML element with the ng-http-loader directive. This
+                will be displayed while requests are pending:
+
+                <code>
+                    &lt;div ng-http-loader
+                    template="example/loader.tpl.html"&gt;&lt;/div&gt;
+                </code>
+            </p>
+
+
+            <h5 class="text-muted">Different loaders for different
+                methods</h5>
+
+            <p>
+                Monitor only GET requests:
+
+                <code>
+                    &lt;div ng-http-loader methods="GET"<br>
+                    template="example/loader.tpl.html"&gt;&lt;/div&gt;
+                </code>
+
+            <p>
+
+            <p>
+                Monitor POST and PUT requests:
+                <code>
+                    &lt;div ng-http-loader methods="['POST', 'PUT']"<br>
+                    template="example/loader.tpl.html"&gt;&lt;/div&gt;
+                </code>
+            </p>
+
+            <h5 class="text-muted">Adding a title to your template</h5>
+
+            <p>
+                HTTP loader allows you to pass a title to your template:
+
+                <code>
+                    &lt;div ng-http-loader title="example" methods="GET"<br>
+                    template="example/loader.tpl.html"&gt;&lt;/div&gt;
+                </code>
+            </p>
+
+            <p>
+                And use that in your template:
+                <code>&lt;span&gt;Loader for {{title}}&lt;/span&gt;</code>
+            </p>
+            <h5 class="text-muted">Contributing</h5>
+
+            <p>We <span style="color: red">&hearts;</span> pull requests!</p>
+
+            <p>
+                To contribute:
+            </p>
+            <ul>
+                <li>Fork the repo</li>
+                <li>Run npm install</li>
+                <li>Run bower install</li>
+                <li>Run grunt workflow:dev to watch for changes, lint, build and
+                    run
+                </li>
+                <li>tests as you're working</li>
+                <li>Write your unit tests for your change</li>
+                <li>Run grunt package to update the distribution files</li>
+                <li>Check that the demo app works (acceptance tests to be
+                    added)
+                </li>
+                <li>Update README.md and, if necessary, the demo page</li>
+            </ul>
+        </div>
+
+        <div class="col-lg-6" ng-app="demo" ng-controller="demoCtrl">
+            <div class="page-header"><h4>Demo</h4></div>
+            <button class="btn btn-sm btn-success" ng-click="makeRequest(1)">
+                jsontest (Whitelisted)
+            </button>
+            <button class="btn btn-sm btn-success" ng-click="makeRequest(2)">
+                Github (Whitelisted)
+            </button>
+            <button class="btn btn-sm btn-danger" ng-click="makeRequest(3)">
+                Flickr (Not whitelisted - loader won't show)
+            </button>
+
+            <!-- Loader template -->
+            <script type="text/ng-template"
+                    id="example-loader.tpl.html">
+                <div class="flyover">
+                    <div class="mask"></div>
+                    <div class="alert alert-info">
+                        <strong>Loading {{title}}...</strong>
+                    </div>
+                </div>
+            </script>
+
+            <!-- show loader for GET methods -->
+            <div ng-http-loader methods="GET" title="Foo"
+                 template="example-loader.tpl.html"></div>
+        </div>
+    </div>
+    <div class="footer text-center small" style="margin:20px;">
+        <p>© Wonga 2014 -
+            <a href="http://tech.wonga.com" role="button">
+                Wonga tech website
+            </a>
+        </p>
+    </div>
+</div>
+
+<script>
+    var app = angular
+            .module('demo', ['ng.httpLoader'])
+
+            .config([
+                'httpMethodInterceptorProvider',
+                function (httpMethodInterceptorProvider) {
+                    httpMethodInterceptorProvider.whitelistDomain('validate.jsontest.com');
+                    httpMethodInterceptorProvider.whitelistDomain('github.com');
+                }
+            ])
+
+            .controller('demoCtrl', [
+                '$scope',
+                '$http',
+                function (scope, $http) {
+                    scope.makeRequest = function (index) {
+                        switch (index) {
+                            case 1:
+                                $http.get('http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D');
+                                break;
+                            case 2:
+                                $http.get('https://api.github.com/users/fabpot/repos');
+                                break;
+                            case 3:
+                                $http.get('http://www.flickr.com/services/feeds/photos_public.gne?tags=soccer&format=json');
+                                break;
+                        }
+                    }
+                }
+            ]);
+</script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
