@@ -2,6 +2,9 @@
   "name": "angular-http-loader",
   "version": "0.1.0",
   "dependencies": {},
+  "scripts": {
+    "test": "grunt test:dev"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.4.1",
