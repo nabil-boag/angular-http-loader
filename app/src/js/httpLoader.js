@@ -8,7 +8,8 @@ angular
   .directive('ngHttpLoader', [
     '$rootScope',
     '$parse',
-    function ($rootScope, $parse) {
+    '$timeout',
+    function ($rootScope, $parse, $timeout) {
 
       /**
        * Usage example:
@@ -39,11 +40,13 @@ angular
          * @param {array|string} methods
          * @param {string} template
          * @param {string} title
+         * @param {number} time to live in seconds
          */
         scope: {
           methods: '@',
           template: '@',
-          title: '@'
+          title: '@',
+          ttl: '@'
         },
         template: '<div ng-include="template" ng-show="showLoader"></div>',
         link: function ($scope) {
@@ -53,6 +56,12 @@ angular
           angular.forEach(methods, function (method, index) {
             methods[index] = method.toUpperCase();
           });
+
+          var ttl = $parse($scope.ttl)() || $scope.ttl;
+          ttl = angular.isUndefined(ttl) ? 0 : ttl;
+          ttl = Number(ttl) * 1000;
+          ttl = angular.isNumber(ttl) ? ttl : 0;
+
 
           // add minimal indexOf polyfill
           if (!Array.prototype.indexOf) {
@@ -73,6 +82,9 @@ angular
            */
           $scope.showLoader = false;
 
+          var timeoutId,
+              showLoader = $scope.showLoader;
+
           /**
            * Toggle the show loader.
            * Contains the logic to show or hide the loader depending
@@ -83,10 +95,25 @@ angular
            */
           var toggleShowLoader = function (event, method) {
             if (methods.indexOf(method.toUpperCase()) !== -1) {
-              $scope.showLoader = (event.name === 'loaderShow');
+              showLoader = (event.name === 'loaderShow');
             } else if (methods.length === 0) {
-              $scope.showLoader = (event.name === 'loaderShow');
+              showLoader = (event.name === 'loaderShow');
             }
+            
+            if (ttl <= 0 || (!timeoutId && !showLoader)) {
+              $scope.showLoader = showLoader;
+              return;
+            } else if (timeoutId) {
+              return;
+            }
+
+            $scope.showLoader = showLoader;
+            timeoutId = $timeout(function () {
+              if (!showLoader) {
+                $scope.showLoader = showLoader;
+              }
+              timeoutId = undefined;
+            }, ttl);
           };
 
           $rootScope.$on("loaderShow", toggleShowLoader);
