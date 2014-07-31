@@ -18,7 +18,6 @@
     "angular-scenario": "~1.2.0"
   },
   "dependencies": {
-    "angular": "~1.2.0",
-    "lodash": "*"
+    "angular": "~1.2.0"
   }
 }

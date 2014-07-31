@@ -33,9 +33,13 @@ angular
          * @returns {boolean}
          */
         var isUrlOnWhitelist = function (url) {
-          return _.any(domains, function (domain) {
-            return _.contains(url, domain);
-          });
+          for (var i = domains.length; i--;) {
+            if (url.indexOf(domains[i]) !== -1) {
+              return true;
+            }
+          }
+
+          return false;
         };
 
         /**

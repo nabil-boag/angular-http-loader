@@ -1,4 +1,4 @@
-/* global angular, _, console */
+/* global angular, console */
 
 angular
   .module('ng.httpLoader', [
@@ -9,6 +9,7 @@ angular
     '$rootScope',
     '$parse',
     function ($rootScope, $parse) {
+
       /**
        * Usage example:
        *
@@ -47,11 +48,24 @@ angular
         template: '<div ng-include="template" ng-show="showLoader"></div>',
         link: function ($scope) {
           var methods = $parse($scope.methods)() || $scope.methods;
-          methods = (methods === undefined) ? [] : methods;
-          methods = (_.isArray(methods)) ? methods : [methods];
-          methods = _.map(methods, function (method) {
-            return method.toUpperCase();
+          methods = angular.isUndefined(methods) ? [] : methods;
+          methods = angular.isArray(methods) ? methods : [methods];
+          angular.forEach(methods, function (method, index) {
+            methods[index] = method.toUpperCase();
           });
+
+          // add minimal indexOf polyfill
+          if (!Array.prototype.indexOf) {
+            methods.indexOf = function (value) {
+              for (var i = this.length; i--;) {
+                if (this[i] === value) {
+                  return i;
+                }
+              }
+
+              return -1;
+            };
+          }
 
           /**
            * Loader is hidden by default
@@ -68,9 +82,9 @@ angular
            * @param {string} method
            */
           var toggleShowLoader = function (event, method) {
-            if (_.indexOf(methods, method.toUpperCase()) !== -1) {
+            if (methods.indexOf(method.toUpperCase()) !== -1) {
               $scope.showLoader = (event.name === 'loaderShow');
-            } else if (_.isEmpty(methods)) {
+            } else if (methods.length === 0) {
               $scope.showLoader = (event.name === 'loaderShow');
             }
           };
@@ -117,9 +131,13 @@ angular
          * @returns {boolean}
          */
         var isUrlOnWhitelist = function (url) {
-          return _.any(domains, function (domain) {
-            return _.contains(url, domain);
-          });
+          for (var i = domains.length; i--;) {
+            if (url.indexOf(domains[i]) !== -1) {
+              return true;
+            }
+          }
+
+          return false;
         };
 
         /**
