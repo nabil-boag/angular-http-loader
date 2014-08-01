@@ -9,6 +9,7 @@ module.exports = function(config) {
     plugins: [
       'karma-jasmine',
       'karma-coverage',
+      'karma-spec-reporter',
       'karma-firefox-launcher',
       'karma-phantomjs-launcher',
       'karma-chrome-launcher'
@@ -20,7 +21,6 @@ module.exports = function(config) {
     files: [
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/lodash/dist/lodash.js',
       'js/httpMethodInterceptor.js',
       'js/httpLoader.js',
       'js/**/*.spec.js',
@@ -32,12 +32,14 @@ module.exports = function(config) {
     /**
      * How to report, by default.
      */
-    reporters: ['coverage', 'dots'],
+    reporters: ['coverage', 'dots', 'spec'],
 
     coverageReporter:  {
       type : 'html',
       dir : '../../coverage/'
     },
+
+    logLevel: config.LOG_DEBUG,
 
     singleRun: true,
     browsers: [

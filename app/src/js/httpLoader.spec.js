@@ -1,4 +1,5 @@
-/* global beforeEach, describe, expect, inject, it, module, angular */
+/* global beforeEach, describe, expect, inject, it, waits, runs,
+module, angular, console, jasmine */
 
 describe('Angular HTTP loader', function () {
   var elem, scope, $rootScope;
@@ -152,5 +153,77 @@ describe('Angular HTTP loader', function () {
       //Assert.
       expect(elem.text()).toContain('foo-fake');
     });
+  });
+
+  describe("open the loader for a minimum ttl", function () {
+    beforeEach(function () {
+      compileDirective('<div ng-http-loader ttl="1"' +
+        'template="example-loader.tpl.html"></div>');
+    });
+
+    it("should open close the loader with a minimum ttl", inject(
+      function ($browser) {
+        runs(function () {
+          // Act
+          $rootScope.$emit('loaderShow', 'FOO');
+          scope.$digest();
+
+          //Assert.
+          expect(elem.find('div').attr('class')).not.toContain('ng-hide');
+
+          //Act.
+          $rootScope.$emit('loaderHide', 'FOO');
+          scope.$digest();
+
+          //Assert.
+          expect(elem.find('div').attr('class')).not.toContain('ng-hide');
+        });
+        waits(1000);
+
+        runs(function () {
+          // Clear timeouts.
+          $browser.defer.flush();
+
+          //Assert.
+          expect(elem.find('div').attr('class')).toContain('ng-hide');
+        });
+      }));
+
+    it("should open close the loader with multiple requests", inject(
+      function ($browser) {
+        runs(function () {
+          // Act
+          $rootScope.$emit('loaderShow', 'FOO');
+          scope.$digest();
+
+          //Act.
+          $rootScope.$emit('loaderHide', 'FOO');
+          scope.$digest();
+
+          //Assert.
+          expect(elem.find('div').attr('class')).not.toContain('ng-hide');
+        });
+        waits(1000);
+
+        runs(function () {
+          // Act
+          $rootScope.$emit('loaderShow', 'BAR');
+          scope.$digest();
+
+          // Clears timeouts.
+          $browser.defer.flush();
+
+          //Assert.
+          expect(elem.find('div').attr('class')).not.toContain('ng-hide');
+
+          //Act.
+          $rootScope.$emit('loaderHide', 'FOO');
+          scope.$digest();
+
+          //Assert.
+          expect(elem.find('div').attr('class')).toContain('ng-hide');
+        });
+      }
+    ));
   });
 });
