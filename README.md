@@ -89,6 +89,19 @@ And use that in your template:
 <span>Loader for {{title}}</span>
 ```
 
+### Minimum time to live
+
+HTTP loader allows you to pass a ttl in seconds to your template.
+This tells the loader to be visible at least for the given amount of time, i.e.
+
+```html
+<div ng-http-loader ttl="2" methods="GET" template="example/loader.tpl.html"></div>
+```
+
+_The loader should be now visible at least 2 seconds, independent of the total http request(s)
+dispatched. Should the total amount of time of the request(s) be larger than the ttl,
+the loader will dismiss when the last http request is done._
+
 Contributing
 ------------
 

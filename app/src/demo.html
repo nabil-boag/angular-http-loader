@@ -5,7 +5,6 @@
     <title>Angular HTTP Loader</title>
 
     <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/lodash/dist/lodash.min.js"></script>
 
     <script src="js/httpLoader.js"></script>
     <script src="js/httpMethodInterceptor.js"></script>
@@ -52,7 +51,10 @@
     <script type="text/ng-template" id="example-loader.tpl.html">Loading {{title}}...</script>
 
     <!-- show loader for GET methods -->
-     <div ng-http-loader methods="GET" title="Foo" template="example-loader.tpl.html"></div>
+    <div ng-http-loader methods="GET" title="Foo" template="example-loader.tpl.html"></div>
+
+    <!-- show loader for GET methods and loader should be visible at least 2 seconds -->
+    <!-- <div ng-http-loader methods="GET" title="Foo" ttl="2" template="example-loader.tpl.html"></div> -->
 
     <!-- show loader for PUT and POST methods -->
     <!--<div ng-http-loader methods="['PUT', 'POST']" template="example-loader.tpl.html"></div>-->
