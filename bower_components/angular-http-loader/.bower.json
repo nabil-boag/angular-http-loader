@@ -1,6 +1,6 @@
 {
   "name": "angular-http-loader",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "ignore": [
     "app/src",
     ".bowerrc",
@@ -18,18 +18,17 @@
     "angular-scenario": "~1.2.0"
   },
   "dependencies": {
-    "angular": "~1.2.0",
-    "lodash": "*"
+    "angular": "~1.2.0"
   },
   "homepage": "https://github.com/wongatech/angular-http-loader",
-  "_release": "0.1.0",
+  "_release": "0.1.1",
   "_resolution": {
     "type": "version",
-    "tag": "v0.1.0",
-    "commit": "96a6e513011b90b1b1cf6759d358a05ebae5ad19"
+    "tag": "v0.1.1",
+    "commit": "e3741273e9eb9ba9561f9f430dc2bd8805967229"
   },
   "_source": "git://github.com/wongatech/angular-http-loader.git",
-  "_target": "~0.1.0",
+  "_target": "~0.1.1",
   "_originalSource": "angular-http-loader",
   "_direct": true
 }
