@@ -61,6 +61,7 @@
 
         <div class="media-body">
             <h1 class="text-muted">Angular HTTP Loader</h1>
+
             <p>
                 <img src="https://travis-ci.org/wongatech/angular-http-loader.svg?branch=master">
             </p>
@@ -197,6 +198,20 @@
             And use that in your template:
             <code>&lt;span&gt;Loader for {{title}}&lt;/span&gt;</code>
         </p>
+
+        <h5 class="text-muted">TTL Usage</h5>
+
+        <p>
+            HTTP loader allows you to pass a ttl in seconds to your template.
+            This tells the loader to be visible at least for the given amount
+            of time:
+
+            <code>
+                &lt;div ng-http-loader ttl="2"
+                template="example/loader.tpl.html"&gt;&lt;/div&gt;
+            </code>
+        </p>
+
         <h5 class="text-muted">Contributing</h5>
 
         <p>We <span style="color: red">&hearts;</span> pull requests!</p>
@@ -223,15 +238,18 @@
 
     <div class="col-lg-6" ng-app="demo" ng-controller="demoCtrl">
         <div class="page-header"><h4>Demo</h4></div>
-        <button class="btn btn-sm btn-success" ng-click="makeRequest(1)">
-            jsontest (Whitelisted)
-        </button>
-        <button class="btn btn-sm btn-success" ng-click="makeRequest(2)">
-            Github (Whitelisted)
-        </button>
-        <button class="btn btn-sm btn-danger" ng-click="makeRequest(3)">
-            Flickr (Not whitelisted - loader won't show)
-        </button>
+
+        <div class="btn-group">
+            <button class="btn btn-xs btn-success" ng-click="makeRequest(1)">
+                jsontest (Whitelisted) 5 TTL
+            </button>
+            <button class="btn btn-xs btn-success" ng-click="makeRequest(2)">
+                Github (Whitelisted) 5 TTL
+            </button>
+            <button class="btn btn-xs btn-danger" ng-click="makeRequest(3)">
+                Flickr (Not whitelisted - loader won't show)
+            </button>
+        </div>
 
         <!-- Loader template -->
         <script type="text/ng-template"
@@ -245,7 +263,10 @@
         </script>
 
         <!-- show loader for GET methods -->
-        <div ng-http-loader methods="GET" title="Foo"
+        <div ng-http-loader
+             methods="GET"
+             title="Foo"
+             ttl="5"
              template="example-loader.tpl.html"></div>
     </div>
 </div>
