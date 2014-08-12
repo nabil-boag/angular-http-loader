@@ -13,7 +13,7 @@
     "package.json",
     "README.md"
   ],
-  "main": "angular-http-loader/app/package/js/angular-http-loeader.min.js",
+  "main": "angular-http-loader/app/package/js/angular-http-loader.min.js",
   "devDependencies": {
     "angular-mocks": "~1.2.0",
     "angular-scenario": "~1.2.0"
