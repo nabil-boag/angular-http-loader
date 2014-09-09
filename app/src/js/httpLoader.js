@@ -48,7 +48,7 @@ angular
           title: '@',
           ttl: '@'
         },
-        template: '<div class="loader__wrapper" ' +
+        template: '<div class="http-loader__wrapper" ' +
           'ng-include="template" ' +
           'ng-show="showLoader"></div>',
         link: function ($scope) {
