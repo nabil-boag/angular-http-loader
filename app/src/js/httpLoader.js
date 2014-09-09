@@ -48,7 +48,9 @@ angular
           title: '@',
           ttl: '@'
         },
-        template: '<div ng-include="template" ng-show="showLoader"></div>',
+        template: '<div class="loader__wrapper" ' +
+          'ng-include="template" ' +
+          'ng-show="showLoader"></div>',
         link: function ($scope) {
           var methods = $parse($scope.methods)() || $scope.methods;
           methods = angular.isUndefined(methods) ? [] : methods;
