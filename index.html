@@ -18,7 +18,6 @@
     <![endif]-->
 
     <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/lodash/dist/lodash.min.js"></script>
     <script src="bower_components/angular-http-loader/app/package/js/angular-http-loader.min.js"></script>
 
     <style>
@@ -85,30 +84,30 @@
         <iframe src="http://ghbtns.com/github-btn.html?user=wongatech&repo=angular-http-loader&type=follow&count=true"
                 allowtransparency="true" frameborder="0" scrolling="0"
                 width="200" height="20"></iframe>
-        <a href="https://twitter.com/share" class="twitter-share-button"
-           data-via="wongatech">Tweet</a>
-        <script>!function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-            if (!d.getElementById(id)) {
-                js = d.createElement(s);
-                js.id = id;
-                js.src = p + '://platform.twitter.com/widgets.js';
-                fjs.parentNode.insertBefore(js, fjs);
-            }
-        }(document, 'script', 'twitter-wjs');</script>
-
+        <a class="twitter-share-button"
+            href="https://twitter.com/intent/tweet" data-count="none">
+            Tweet</a>
         <a href="https://twitter.com/wongatech"
-           class="twitter-follow-button" data-show-count="false">Follow
-            @wongatech</a>
-        <script>!function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-            if (!d.getElementById(id)) {
-                js = d.createElement(s);
-                js.id = id;
-                js.src = p + '://platform.twitter.com/widgets.js';
-                fjs.parentNode.insertBefore(js, fjs);
-            }
-        }(document, 'script', 'twitter-wjs');</script>
+           class="twitter-follow-button">Follow
+          @wongatech</a>
+        <script>
+          window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+              t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function(f) {
+              t._e.push(f);
+            };
+
+            return t;
+          }(document, "script", "twitter-wjs"));
+        </script>
     </p>
 </div>
 
@@ -270,7 +269,7 @@
     </div>
 </div>
 <div class="footer text-center small" style="margin:20px;">
-    <p>© Wonga 2014 -
+    <p>© Wonga 2015 -
         <a href="http://tech.wonga.com" role="button">
             Wonga tech website
         </a>
