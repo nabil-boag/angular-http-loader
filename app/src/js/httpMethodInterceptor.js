@@ -7,7 +7,8 @@ angular
   .module('ng.httpLoader.httpMethodInterceptor', [])
 
   .provider('httpMethodInterceptor', function () {
-    var domains = [];
+    var domains = [],
+      whitelistLocalRequests = false;
 
     /**
      * Add domains to the white list
@@ -17,6 +18,13 @@ angular
      */
     this.whitelistDomain = function (domain) {
       domains.push(domain);
+    };
+
+    /**
+     * White list requests to the local domain
+     */
+    this.whitelistLocalRequests = function () {
+      whitelistLocalRequests = true;
     };
 
     this.$get = [
@@ -33,6 +41,12 @@ angular
          * @returns {boolean}
          */
         var isUrlOnWhitelist = function (url) {
+          if (url.substring(0, 2) !== '//' &&
+            url.indexOf('://') === -1 &&
+            whitelistLocalRequests) {
+            return true;
+          }
+
           for (var i = domains.length; i--;) {
             if (url.indexOf(domains[i]) !== -1) {
               return true;

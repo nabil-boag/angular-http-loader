@@ -1,6 +1,5 @@
 {
   "name": "angular-http-loader",
-  "version": "0.1.4",
   "ignore": [
     "app/src",
     ".bowerrc",
