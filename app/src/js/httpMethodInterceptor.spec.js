@@ -5,7 +5,7 @@ describe('httpMethodInterceptor', function () {
     mockRootScope, mockRejectPromise;
 
   beforeEach(function () {
-    mockRejectPromise = { 'foo': 'bar' };
+    mockRejectPromise = { foo: 'bar' };
     mockQ = jasmine.createSpyObj('$q', ['when', 'reject']);
     mockQ.reject.andReturn(mockRejectPromise);
     mockRootScope = jasmine.createSpyObj('$rootScope', ['$emit']);
@@ -26,8 +26,8 @@ describe('httpMethodInterceptor', function () {
       });
     });
 
-    it("should not broadcast the show loader event if the domain is not " +
-      "on the white list", function () {
+    it('should not broadcast the show loader event if the domain is not ' +
+      'on the white list', function () {
         //Arrange.
         var config = { url: 'http://foo.wrong' };
 
@@ -39,8 +39,8 @@ describe('httpMethodInterceptor', function () {
         expect(response).toBe(config);
       });
 
-    it("should broadcast the show loader event for external request on " +
-      "whitelist", function () {
+    it('should broadcast the show loader event for external request on ' +
+      'whitelist', function () {
         //Arrange.
         var config = { method: 'GET', url: 'http://foo.bar/my/api' };
 
@@ -52,7 +52,7 @@ describe('httpMethodInterceptor', function () {
           .toHaveBeenCalledWith('loaderShow', config.method);
       });
 
-    it("should not broadcast the show loader event for local request",
+    it('should not broadcast the show loader event for local request',
       function () {
         //Arrange.
         var config = { method: 'GET', url: '/my/api' };
@@ -64,7 +64,7 @@ describe('httpMethodInterceptor', function () {
         expect(mockRootScope.$emit).not.toHaveBeenCalled();
       });
 
-    it("should return the config", function () {
+    it('should return the config', function () {
       //Arrange.
       var config = { method: 'GET', url: 'http://foo.bar/my/api' };
 
@@ -91,7 +91,7 @@ describe('httpMethodInterceptor', function () {
       });
     });
 
-    it("should broadcast the show loader event for local request",
+    it('should broadcast the show loader event for local request',
       function () {
         //Arrange.
         var config = { method: 'GET', url: '/my/api' };
@@ -121,8 +121,8 @@ describe('httpMethodInterceptor', function () {
       });
     });
 
-    it("should not broadcast the hide event if the show event " +
-      "was not already fired", function () {
+    it('should not broadcast the hide event if the show event ' +
+      'was not already fired', function () {
         //Arrange.
         var response = { config: { method: 'GET', url: 'foo.bar/my/api' } };
 
@@ -134,8 +134,8 @@ describe('httpMethodInterceptor', function () {
           .not.toHaveBeenCalledWith('loaderHide', response.config.method);
       });
 
-    it("should broadcast the hide event on the response method " +
-      "and return the response", function () {
+    it('should broadcast the hide event on the response method ' +
+      'and return the response', function () {
         //Arrange.
         var config = { url: 'foo.bar/my/api' },
           response = { config: { method: 'GET', url: 'foo.bar/my/api' } };
@@ -150,8 +150,8 @@ describe('httpMethodInterceptor', function () {
         expect(res).toBe(response);
       });
 
-    it("should not broadcast the hide event on the response error " +
-      "if the show event was not already fired", function () {
+    it('should not broadcast the hide event on the response error ' +
+      'if the show event was not already fired', function () {
         //Arrange.
         var response = { config: { method: 'GET', url: 'foo.bar/my/api' } };
 
@@ -164,8 +164,8 @@ describe('httpMethodInterceptor', function () {
         expect(res).toBe(mockRejectPromise);
       });
 
-    it("should broadcast the hide loader event on the response error method " +
-      "and return the reject promise", function () {
+    it('should broadcast the hide loader event on the response error method ' +
+      'and return the reject promise', function () {
         //Arrange.
         var config = { url: 'foo.bar/my/api' },
           response = { config: { method: 'GET', url: 'foo.bar/my/api' } };
@@ -180,7 +180,7 @@ describe('httpMethodInterceptor', function () {
         expect(res).toBe(mockRejectPromise);
       });
 
-    it("should only emit the hide event once all requests have closed",
+    it('should only emit the hide event once all requests have closed',
       function () {
         // Arrange.
         var res,

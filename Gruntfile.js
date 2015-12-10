@@ -1,4 +1,4 @@
-/* global module, require */
+/* global module */
 
 module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-bump');
@@ -7,6 +7,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-karma');
@@ -20,6 +21,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'jshint',
+    'jscs',
     'clean:build',
     'copy:build'
   ]);
@@ -46,7 +48,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON("package.json"),
+    pkg: grunt.file.readJSON('package.json'),
     env: grunt.option('env') || 'dev',
 
     app: {
@@ -63,10 +65,21 @@ module.exports = function (grunt) {
 
     jshint: {
       source: [
+        '*.js',
         '<%= app.source_dir %>/js/**/*.js'
       ],
       options: {
         jshintrc: '.jshintrc'
+      }
+    },
+
+    jscs: {
+      source: [
+        '*.js',
+        '<%= app.source_dir %>/js/**/*.js'
+      ],
+      options: {
+        config: '.jscsrc'
       }
     },
 

@@ -1,4 +1,4 @@
-/* global angular, _, console */
+/* global angular */
 
 /**
  * Http method interceptor. Broadcast events for show or hide the loader.
