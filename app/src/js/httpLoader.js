@@ -1,4 +1,4 @@
-/* global angular, console */
+/* global angular */
 
 angular
   .module('ng.httpLoader', [
@@ -101,11 +101,12 @@ angular
             } else if (methods.length === 0) {
               showLoader = (event.name === 'loaderShow');
             }
-            
+
             if (ttl <= 0 || (!timeoutId && !showLoader)) {
               $scope.showLoader = showLoader;
               return;
-            } else if (timeoutId) {
+            }
+            if (timeoutId) {
               return;
             }
 
@@ -118,8 +119,8 @@ angular
             }, ttl);
           };
 
-          $rootScope.$on("loaderShow", toggleShowLoader);
-          $rootScope.$on("loaderHide", toggleShowLoader);
+          $rootScope.$on('loaderShow', toggleShowLoader);
+          $rootScope.$on('loaderHide', toggleShowLoader);
         }
       };
     }

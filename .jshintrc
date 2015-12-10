@@ -9,5 +9,6 @@
   "white": true,
   "indent": 2,
   "undef": true,
-  "maxlen": 80
+  "maxlen": 80,
+  "unused": true
 }

@@ -1,5 +1,4 @@
-/* global beforeEach, describe, expect, inject, it, waits, runs,
-module, angular, console, jasmine */
+/* global beforeEach, describe, expect, inject, it, waits, runs, module */
 
 describe('Angular HTTP loader', function () {
   var elem, scope, $rootScope;
@@ -21,13 +20,13 @@ describe('Angular HTTP loader', function () {
     scope.$digest();
   }
 
-  describe("no defined methods", function () {
+  describe('no defined methods', function () {
     beforeEach(function () {
       compileDirective(
         '<div ng-http-loader template="example-loader.tpl.html"></div>');
     });
 
-    it("should open and close the loader", function () {
+    it('should open and close the loader', function () {
       //Arrange.
       $rootScope.$emit('loaderShow', 'FOO');
 
@@ -118,13 +117,13 @@ describe('Angular HTTP loader', function () {
     });
   });
 
-  describe("lowercase method", function () {
+  describe('lowercase method', function () {
     beforeEach(function () {
       compileDirective('<div ng-http-loader methods="get" ' +
         'template="example-loader.tpl.html"></div>');
     });
 
-    it("should open and close the loader",
+    it('should open and close the loader',
       function () {
         //Arrange.
         $rootScope.$emit('loaderShow', 'GET');
@@ -137,13 +136,13 @@ describe('Angular HTTP loader', function () {
       });
   });
 
-  describe("checking title showing on the template", function () {
+  describe('checking title showing on the template', function () {
     beforeEach(function () {
       compileDirective('<div ng-http-loader title="foo-fake" methods="POST" ' +
         'template="example-loader.tpl.html"></div>');
     });
 
-    it("should the copy contain the established title", function () {
+    it('should the copy contain the established title', function () {
       //Arrange.
       $rootScope.$emit('loaderShow', 'POST');
 
@@ -155,13 +154,13 @@ describe('Angular HTTP loader', function () {
     });
   });
 
-  describe("open the loader for a minimum ttl", function () {
+  describe('open the loader for a minimum ttl', function () {
     beforeEach(function () {
       compileDirective('<div ng-http-loader ttl="1"' +
         'template="example-loader.tpl.html"></div>');
     });
 
-    it("should open close the loader with a minimum ttl", inject(
+    it('should open close the loader with a minimum ttl', inject(
       function ($browser) {
         runs(function () {
           // Act
@@ -189,7 +188,7 @@ describe('Angular HTTP loader', function () {
         });
       }));
 
-    it("should open close the loader with multiple requests", inject(
+    it('should open close the loader with multiple requests', inject(
       function ($browser) {
         runs(function () {
           // Act

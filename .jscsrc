@@ -1,0 +1,28 @@
+{
+    "preset": "node-style-guide",
+    "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
+    "disallowTrailingComma": true,
+    "disallowSpacesInFunction": null,
+    "requireCapitalizedComments": null,
+    "requireTrailingComma": null,
+    "requireSpaceAfterLineComment": null,
+    "disallowMultipleVarDecl": null,
+    "maximumLineLength": null,
+    "requireLineBreakAfterVariableAssignment": true,
+    "requireSpaceAfterKeywords": [
+        "do",
+        "for",
+        "if",
+        "else",
+        "switch",
+        "case",
+        "try",
+        "catch",
+        "void",
+        "while",
+        "with",
+        "return",
+        "typeof",
+        "function"
+    ]
+}
