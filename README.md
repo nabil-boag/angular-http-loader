@@ -41,7 +41,7 @@ Add the `ng.httpLoader` module as a dependency in your application:
 angular.module('demo', ['ng.httpLoader'])
 ```
 
-Whitelist the domains that you want the loader to show for:
+Whitelist the external domains that you want the loader to show for:
 
 ```javascript
 .config([
@@ -49,6 +49,19 @@ Whitelist the domains that you want the loader to show for:
   function (httpMethodInterceptorProvider) {
     httpMethodInterceptorProvider.whitelistDomain('github.com');
     httpMethodInterceptorProvider.whitelistDomain('twitter.com');
+    // ...
+  }
+])
+```
+
+You can whitelist requests to the local server:
+
+```javascript
+.config([
+  'httpMethodInterceptorProvider',
+  function (httpMethodInterceptorProvider) {
+    // ...
+    httpMethodInterceptorProvider.whitelistLocalRequests();
     // ...
   }
 ])

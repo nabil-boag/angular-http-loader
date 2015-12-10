@@ -18,6 +18,7 @@
           function (httpMethodInterceptorProvider) {
             httpMethodInterceptorProvider.whitelistDomain('validate.jsontest.com');
             httpMethodInterceptorProvider.whitelistDomain('github.com');
+            httpMethodInterceptorProvider.whitelistLocalRequests();
           }
         ])
 
@@ -25,28 +26,22 @@
           '$scope',
           '$http',
           function (scope, $http) {
-            scope.makeRequest = function (index) {
-              switch (index) {
-                case 1:
-                  $http.get('http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D');
-                  break;
-                case 2:
-                  $http.get('https://api.github.com/users/fabpot/repos');
-                  break;
-                case 3:
-                  $http.get('http://www.flickr.com/services/feeds/photos_public.gne?tags=soccer&format=json');
-                  break;
-              }
+            scope.buttons = [
+              {'name': 'jsontest (Whitelisted)', 'link': 'http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D'},
+              {'name': 'Github (Whitelisted)', 'link': '//api.github.com/users/fabpot/repos'},
+              {'name': 'Local request (Whitelisted)', 'link': '/demo.html'},
+              {'name': 'Flickr (Not whitelisted - loader won\'t show)', 'link': 'http://www.flickr.com/services/feeds/photos_public.gne?tags=soccer&format=json'},
+            ];
+
+            scope.makeRequest = function (link) {
+              $http.get(link);
             }
           }
         ]);
     </script>
   </head>
   <body ng-app="demo" ng-controller="demoCtrl">
-    <button ng-click="makeRequest(1)">jsontest (Whitelisted)</button>
-    <button ng-click="makeRequest(2)">Github (Whitelisted)</button>
-    <button ng-click="makeRequest(3)">Flickr (Not whitelisted - loader won't show)</button>
-
+    <button ng-repeat="button in buttons" ng-click="makeRequest(button.link)">{{button.name}}</button>
     <!-- Loader template -->
     <script type="text/ng-template" id="example-loader.tpl.html">Loading {{title}}...</script>
 

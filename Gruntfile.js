@@ -40,6 +40,7 @@ module.exports = function (grunt) {
   grunt.registerTask('workflow:dev', [
     'connect:dev',
     'build',
+    'test:dev',
     'open:dev',
     'watch:dev'
   ]);
