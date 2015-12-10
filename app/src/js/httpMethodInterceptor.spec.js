@@ -4,18 +4,19 @@ describe('httpMethodInterceptor', function () {
   var httpMethodInterceptor, httpMethodInterceptorProvider, mockQ,
     mockRootScope, mockRejectPromise;
 
-  describe('request method', function () {
-    beforeEach(function () {
-      mockRejectPromise = { 'foo': 'bar' };
-      mockQ = jasmine.createSpyObj('$q', ['when', 'reject']);
-      mockQ.reject.andReturn(mockRejectPromise);
-      mockRootScope = jasmine.createSpyObj('$rootScope', ['$emit']);
+  beforeEach(function () {
+    mockRejectPromise = { 'foo': 'bar' };
+    mockQ = jasmine.createSpyObj('$q', ['when', 'reject']);
+    mockQ.reject.andReturn(mockRejectPromise);
+    mockRootScope = jasmine.createSpyObj('$rootScope', ['$emit']);
+  });
 
+  describe('request method with local requests disabled', function () {
+    beforeEach(function () {
       module('ng.httpLoader.httpMethodInterceptor',
         function ($provide, _httpMethodInterceptorProvider_) {
           httpMethodInterceptorProvider = _httpMethodInterceptorProvider_;
           httpMethodInterceptorProvider.whitelistDomain('foo.bar');
-          httpMethodInterceptorProvider.whitelistLocalRequests();
           $provide.value('$rootScope', mockRootScope);
         }
         );
@@ -51,7 +52,7 @@ describe('httpMethodInterceptor', function () {
           .toHaveBeenCalledWith('loaderShow', config.method);
       });
 
-    it("should broadcast the show loader event for local request when enbaled",
+    it("should not broadcast the show loader event for local request",
       function () {
         //Arrange.
         var config = { method: 'GET', url: '/my/api' };
@@ -60,8 +61,7 @@ describe('httpMethodInterceptor', function () {
         httpMethodInterceptor.request(config);
 
         //Assert.
-        expect(mockRootScope.$emit)
-          .toHaveBeenCalledWith('loaderShow', config.method);
+        expect(mockRootScope.$emit).not.toHaveBeenCalled();
       });
 
     it("should return the config", function () {
@@ -76,13 +76,37 @@ describe('httpMethodInterceptor', function () {
     });
   });
 
+  describe('request method with local requests enabled', function () {
+    beforeEach(function () {
+      module('ng.httpLoader.httpMethodInterceptor',
+        function ($provide, _httpMethodInterceptorProvider_) {
+          httpMethodInterceptorProvider = _httpMethodInterceptorProvider_;
+          httpMethodInterceptorProvider.whitelistLocalRequests();
+          $provide.value('$rootScope', mockRootScope);
+        }
+        );
+
+      inject(function (_httpMethodInterceptor_) {
+        httpMethodInterceptor = _httpMethodInterceptor_;
+      });
+    });
+
+    it("should broadcast the show loader event for local request",
+      function () {
+        //Arrange.
+        var config = { method: 'GET', url: '/my/api' };
+
+        //Act.
+        httpMethodInterceptor.request(config);
+
+        //Assert.
+        expect(mockRootScope.$emit)
+          .toHaveBeenCalledWith('loaderShow', config.method);
+      });
+  });
+
   describe('response method', function () {
     beforeEach(function () {
-      mockRejectPromise = { 'foo': 'bar' };
-      mockQ = jasmine.createSpyObj('$q', ['when', 'reject']);
-      mockQ.reject.andReturn(mockRejectPromise);
-      mockRootScope = jasmine.createSpyObj('$rootScope', ['$emit']);
-
       module('ng.httpLoader.httpMethodInterceptor',
         function ($provide, _httpMethodInterceptorProvider_) {
           httpMethodInterceptorProvider = _httpMethodInterceptorProvider_;
