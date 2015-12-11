@@ -1,4 +1,4 @@
-/* global describe, beforeEach, module, it, inject, jasmine, expect */
+/* global describe, beforeEach, module, it, inject, jasmine, expect, spyOn */
 
 describe('httpMethodInterceptor', function () {
   var httpMethodInterceptor, httpMethodInterceptorProvider, mockQ,
@@ -206,4 +206,23 @@ describe('httpMethodInterceptor', function () {
         expect(res).toBe(response);
       });
   });
+
+  describe('config sets $httpProvider interceptor', function () {
+    var $httpProvider;
+
+    beforeEach(function () {
+      module(function (_$httpProvider_) {
+        $httpProvider = _$httpProvider_;
+        spyOn($httpProvider.interceptors, 'unshift');
+      });
+      module('ng.httpLoader.httpMethodInterceptor');
+      inject();
+    });
+
+    it('should add to $httpProvider interceptors', function () {
+      expect($httpProvider.interceptors.unshift)
+        .toHaveBeenCalledWith('httpMethodInterceptor');
+    });
+  });
 });
+

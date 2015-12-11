@@ -117,5 +117,5 @@ angular
   })
 
   .config(['$httpProvider', function ($httpProvider) {
-    $httpProvider.interceptors.push('httpMethodInterceptor');
+    $httpProvider.interceptors.unshift('httpMethodInterceptor');
   }]);
