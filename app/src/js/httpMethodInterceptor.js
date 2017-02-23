@@ -8,6 +8,7 @@ angular
 
   .provider('httpMethodInterceptor', function () {
     var domains = [],
+    blackdomains = [],
       whitelistLocalRequests = false;
 
     /**
@@ -18,6 +19,16 @@ angular
      */
     this.whitelistDomain = function (domain) {
       domains.push(domain);
+    };
+
+    /**
+     * Add domains to the white list
+     *
+     * @param {string} domain
+     * Added Domain to the white list domains collection
+     */
+    this.blacklistDomain = function (domain) {
+      blackdomains.push(domain);
     };
 
     /**
@@ -50,6 +61,12 @@ angular
           for (var i = domains.length; i--;) {
             if (url.indexOf(domains[i]) !== -1) {
               return true;
+            }
+          }
+
+          for (var j = blackdomains.length; j--;) {
+            if (url.indexOf(blackdomains[j]) !== -1) {
+              return false;
             }
           }
 
