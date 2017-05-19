@@ -3,11 +3,10 @@ language: node_js
 node_js:
   - "6.9.5"
 
-before_install: npm install -g bower grunt-cli
+before_install: npm install -g grunt-cli
 
 install:
   - npm install
-  - bower install
 
 before_script:
   - grunt build

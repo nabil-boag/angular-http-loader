@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'build',
-    'test',
+    'test:dev',
     'package'
   ]);
 
@@ -94,7 +94,16 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
-            src: ['bower.json', 'package.json'],
+            cwd: 'node_modules',
+            src: [
+              'angular/angular.js',
+              'angular-mocks/angular-mocks.js'
+            ],
+            dest: '<%= app.build_dir %>/node_modules'
+          },
+          {
+            expand: true,
+            src: ['package.json'],
             dest: '<%= app.build_dir %>'
           }
         ]
@@ -144,8 +153,8 @@ module.exports = function (grunt) {
 
     bump: {
       options: {
-        files: ['bower.json', 'package.json'],
-        commitFiles: ['bower.json', 'package.json'],
+        files: ['package.json'],
+        commitFiles: ['package.json'],
         pushTo: 'origin'
       }
     },

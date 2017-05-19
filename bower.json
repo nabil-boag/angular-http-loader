@@ -1,5 +1,6 @@
 {
   "name": "angular-http-loader",
+  "description": "Tool for showing HTTP loaders in AngularJS applications",
   "ignore": [
     "app/src",
     ".bowerrc",
@@ -12,12 +13,5 @@
     "package.json",
     "README.md"
   ],
-  "main": "app/package/js/angular-http-loader.js",
-  "devDependencies": {
-    "angular-mocks": ">= 1.2.0",
-    "angular-scenario": ">= 1.2.0"
-  },
-  "dependencies": {
-    "angular": ">= 1.2.0"
-  }
+  "main": "app/package/js/angular-http-loader.js"
 }
