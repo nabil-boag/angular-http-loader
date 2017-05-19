@@ -1,31 +1,41 @@
 {
   "name": "angular-http-loader",
   "version": "0.1.4",
-  "dependencies": {},
+  "description": "AngularJS HTTP loader",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wongatech/angular-http-loader"
+  },
   "scripts": {
-    "test": "grunt test:dev"
+    "dev": "grunt workflow:dev",
+    "test": "grunt build test:dev",
+    "package": "grunt package"
+  },
+  "dependencies": {
+    "angular": "~1.2.0"
   },
   "devDependencies": {
-    "connect": "~2.9.0",
-    "grunt": "~0.4.1",
-    "grunt-bump": "0.0.14",
-    "grunt-contrib-clean": "~0.4.1",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-connect": "~0.5.0",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-jshint": "~0.7.2",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-jscs": "^2.5.0",
-    "grunt-karma": "~0.7.2",
-    "grunt-open": "~0.2.2",
-    "karma": "~0.12.0",
-    "karma-chrome-launcher": "~0.1.3",
-    "karma-coverage": "~0.0.3",
-    "karma-firefox-launcher": "~0.1.3",
-    "karma-jasmine": "~0.1.5",
-    "karma-ng-scenario": "~0.1.0",
-    "karma-phantomjs-launcher": "~0.1.4",
-    "karma-spec-reporter": "0.0.13"
+    "angular-mocks": "~1.2.0",
+    "connect": "^3.6.2",
+    "grunt": "^1.0.1",
+    "grunt-bump": "^0.8.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^3.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-jscs": "^3.0.1",
+    "grunt-karma": "^2.0.0",
+    "grunt-open": "^0.2.3",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.1.1",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.1",
+    "karma-jasmine": "^0.1.6",
+    "karma-ng-scenario": "^0.1.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-spec-reporter": "0.0.31"
   }
 }

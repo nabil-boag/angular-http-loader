@@ -20,10 +20,10 @@ Travis Status
 Installation
 ------------
 
-Bower:
+NPM:
 
 ```sh
-bower install --save angular-http-loader
+npm install --save angular-http-loader
 ```
 
 Usage
@@ -124,7 +124,6 @@ To contribute:
 
 - Fork the repo
 - Run `npm install`
-- Run `bower install`
 - Run `grunt workflow:dev` to watch for changes, lint, build and run tests as
   you're working
 - Write your unit tests for your change
