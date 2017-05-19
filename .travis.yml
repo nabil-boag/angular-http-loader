@@ -10,6 +10,4 @@ deploy:
   provider: npm
   email: ukfrontend@wonga.com
   api_key:
-    secure: TOiU3dLH18H/QnfvBNuCY+HoPjYzUW57K7za2wPqM/4WjCdVnVSZkuYJQwMgfnRk+e1HbNdaOKpNsN2sn2Gof9kUANfkYXfEBviZlgvRdnN9f6p7TPBuQACEXZM5d5RiTo4QUfZHthgqu1V9pyw+CWrjfMREeZYqRTl+vbU8ptQ=
-  on:
-    repo: wongatech/angular-http-loader
+    secure: NFBuxmKD5FJfPu/SLRk7Ty1Y4AWqTTet1dbfQDqAoxl82d5D3EXK+PMXU/CxsMd9RyFsl/2B/+yGX+N7Oyt2uJs5YBxCaikTh2fZ1OdQj4yij/o264iw6+CtwHLObwtCmhk4t0XiuTRLQURj98BGpgsAUqyTtu59VOrN9cYg0gw=
