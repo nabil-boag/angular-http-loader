@@ -115,6 +115,26 @@ _The loader should be now visible at least 2 seconds, independent of the total h
 dispatched. Should the total amount of time of the request(s) be larger than the ttl,
 the loader will dismiss when the last http request is done._
 
+### Per-request use of HTTP Loader
+
+The HTTP loader can also be enabled or disabled by passing the $useHttpLoader parameter to the $http config object.
+
+```javascript
+$http.get('/someUrl', {
+  params: {$useHttpLoader: true}, // will enable/disable http loader for this request regardless of whitelist
+});
+
+// or with a resource...
+var User = $resource('/user/:userId', {userId:'@id', $useHttpLoader: true}); // default to always using the HTTP loader
+var user = User.get(
+  {userId:123, $useHttpLoader: false}, // this call overrides default parameter defined above
+  function() {
+    user.abc = true;
+    user.$save();
+  }
+);
+```
+
 Contributing
 ------------
 

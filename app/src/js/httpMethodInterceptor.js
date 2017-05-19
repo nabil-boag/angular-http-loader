@@ -63,8 +63,7 @@ angular
          * The response configuration
          */
         var checkAndHide = function (config) {
-          if (isUrlOnWhitelist(config.url) &&
-            (--numLoadings) === 0) {
+          if (config.useHttpLoader && (--numLoadings) === 0) {
             $rootScope.$emit('loaderHide', config.method);
           }
         };
@@ -78,8 +77,17 @@ angular
            * @returns {object|Promise}
            */
           request: function (config) {
-            if (isUrlOnWhitelist(config.url)) {
+            var useHttpLoaderFlagDefined =
+              angular.isObject(config.params) &&
+              angular.isDefined(config.params.$useHttpLoader);
+            if (isUrlOnWhitelist(config.url) &&
+              (!useHttpLoaderFlagDefined ||
+                (useHttpLoaderFlagDefined && config.params.$useHttpLoader))) {
               numLoadings++;
+              if (useHttpLoaderFlagDefined) {
+                delete config.params.$useHttpLoader; // remove flag from params
+              }
+              config.useHttpLoader = true;
               $rootScope.$emit('loaderShow', config.method);
             }
 
