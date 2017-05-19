@@ -1,7 +1,7 @@
 language: node_js
 node_js:
 - 6.9.5
-before_install: npm install -g grunt-cli
+before_install: npm install -g grunt-cli npm
 install:
 - npm install
 before_script:
