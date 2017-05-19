@@ -1,20 +1,15 @@
 language: node_js
-
 node_js:
-  - "6.9.5"
-
+- 6.9.5
 before_install: npm install -g grunt-cli
-
 install:
-  - npm install
-
+- npm install
 before_script:
-  - grunt build
-
+- grunt build
 deploy:
   provider: npm
   email: ukfrontend@wonga.com
   api_key:
-    secure: l2RcuJCd7jgqznrXqQ+bMM+PPVtBP85SlCLZyRYcJ+YfvE1iRjB6Vb1Ll3k4a8NFDLOt1cMO7sEUiLOoP3tFzNr3iBf96tsC826UKqDlu4WPKdhHzjrYJceEAStFaZCMzrrQMGpGqHtkuDGho7FD+Aio50i7XL0GspwzuXxE8pQ=
+    secure: TOiU3dLH18H/QnfvBNuCY+HoPjYzUW57K7za2wPqM/4WjCdVnVSZkuYJQwMgfnRk+e1HbNdaOKpNsN2sn2Gof9kUANfkYXfEBviZlgvRdnN9f6p7TPBuQACEXZM5d5RiTo4QUfZHthgqu1V9pyw+CWrjfMREeZYqRTl+vbU8ptQ=
   on:
-    tags: true
+    repo: wongatech/angular-http-loader
