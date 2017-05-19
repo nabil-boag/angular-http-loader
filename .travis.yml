@@ -10,3 +10,11 @@ install:
 
 before_script:
   - grunt build
+
+deploy:
+  provider: npm
+  email: ukfrontend@wonga.com
+  api_key:
+    secure: l2RcuJCd7jgqznrXqQ+bMM+PPVtBP85SlCLZyRYcJ+YfvE1iRjB6Vb1Ll3k4a8NFDLOt1cMO7sEUiLOoP3tFzNr3iBf96tsC826UKqDlu4WPKdhHzjrYJceEAStFaZCMzrrQMGpGqHtkuDGho7FD+Aio50i7XL0GspwzuXxE8pQ=
+  on:
+    tags: true
