@@ -150,10 +150,10 @@ angular
     };
 
     /**
-     * Add domains to the white list
+     * Add domains to the black list
      *
      * @param {string} domain
-     * Added Domain to the white list domains collection
+     * Added Domain to the black list domains collection
      */
     this.blacklistDomain = function (domain) {
       blackdomains.push(domain);
